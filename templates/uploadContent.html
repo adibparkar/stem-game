@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block headContent %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}uploadContent.css" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}uploadContent.js"></script>
+{% endblock %}
+
+{% block bodyAttributes %}onload="initialize();"{% endblock %}
+
+{%  block mainContent %}
+    <div id="map_canvas"></div>
+    <div id="myLocation" style="visibility: hidden;"><input type="button" value="Current Location" onclick="gotoCurrentLocation();" /></div>
+    <div id="createContent">
+        <form id="formUpload" enctype="multipart/form-data" method="post"> {% csrf_token %}
+            <input type="hidden" id="latitude" name="latitude" value="{{ latitude|default:'' }}" />
+            <input type="hidden" id="longitude" name="longitude" value="{{ longitude|default:'' }}" />
+            <table>
+                {% if errorOccurred %}<tr><th colspan="2">You must provide a location within USC, a name and a description.</th></tr>{% endif %}
+                <tr><th>Location</th><td id="locationCell">Unable to retrieve location. Please use the map.</td></tr>
+                <tr><th>What's here?</th><td><input type="text" id="contentName" name="contentName" value="{{ contentName|default:'' }}"/></td></tr>
+                <tr><th>Photo</th><td><input type="file" id="contentPhoto" name="contentPhoto" /></td></tr>
+                <tr><th colspan="2">OR</th></tr>
+                <tr><th>Photo URL</th><td><input type="text" id="contentPhotoURL" name="contentPhotoURL" /></td></tr>
+                <tr><th>Short Description</th><td><textarea id="contentDescription" rows="10" name="contentDescription">{{ contentDescription|default:'' }}</textarea></td></tr>
+                <tr><th colspan="2"><input type="submit" value="Upload Content" /></th></tr>
+            </table>
+        </form>
+    </div>
+    <div id="footer"><a href="/welcome/">Back</a></div>
+{% endblock %}

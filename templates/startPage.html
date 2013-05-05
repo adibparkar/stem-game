@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{%  block mainContent %}
+    <table>
+        <tr><th><a href="/map/?mode=player">View Map By Player</a></th></tr>
+        <tr><th><a href="/map/?mode=team">View Map By Team</a></th></tr>
+        {% if isPlayer %}<tr><th><a href="/uploadContent/">Create Point Of Interest</a></th></tr>{% endif %}
+        {% if isAdmin %}<tr><th><a href="/approveModeratorList/">Approve Moderator</a></th></tr>{% endif %}
+        {% if isAdmin or isModerator %}<tr><th><a href="/approveTeamList/">Approve Team</a></th></tr>{% endif %}
+        <tr><th><a href="/createTeam/">Create Team</a></th></tr>
+        {% if isPlayer %}<tr><th><a href="/signup/?editMode=true">Edit Profile</a></th></tr>{% endif %}
+    </table>
+{% endblock %}

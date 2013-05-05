@@ -1,0 +1,35 @@
+html
+{
+    height: 100%;
+    width: 100%;
+}
+
+body
+{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map_canvas
+{
+    width: 100%;
+    height: 90%;
+    margin: 0;
+}
+
+.contentCard
+{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.contentCard th
+{
+    text-align: right;
+}
+
+.contentCard td
+{
+    text-align: left;
+}

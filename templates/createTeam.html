@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block headContent %}
+<style type="text/css">
+    .tableList
+    {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block mainContent %}
+    {% if teams %}
+    <table class="tableList">
+        {% for team in teams %}
+        <tr class="tableList">
+            <th class="tableList">{{ team.name }}</th>
+            {% if isModerator or isAdmin %}
+            <td class="tableList"><a href="/deleteTeam?team={{ team.pk }}">Delete</a></td>
+            {% else %}
+                {% if team.adminApproved %}
+                <td class="tableList">Approved Team</td>
+                {% else %}
+                <td class="tableList">Pending Approval</td>
+                {% endif %}
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    <form id="createTeamForm" name="createTeamForm" method="post"> {% csrf_token %}
+        <table>
+            <tr><th>Team Name:</th><td><input type="text" id="teamName" name="teamName" /></td><td>{{ errorText|default:'' }}</td></tr>
+            <tr><th colspan="2"><input type="submit" id="createTeamSubmit" name="createTeamSubmit" value="Create" /></th></tr>
+        </table>
+    </form>
+    <a href="/welcome/">Back</a>
+{% endblock %}

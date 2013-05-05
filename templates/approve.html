@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block headContent %}
+<style type="text/css">
+    .tableList
+    {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+</style>
+{% endblock %}
+
+{% block mainContent %}
+    <div><p>Pending Approval:</p></div>
+    {% if teams %}
+    <table class="tableList">
+        {% for team in teams %}
+            <tr class="tableList">
+                <td class="tableList">{{ team.name }}</td>
+                <td class="tableList"><a href="/approveTeam?team={{ team.pk }}">Approve</a></td>
+                <td class="tableList"><a href="/deleteTeam?team={{ team.pk }}">Reject</a></td>
+            </tr>{% endfor %}
+    </table>
+    {% endif %}
+    {% if moderators %}
+    <table class="tableList">
+        {% for moderator in moderators %}
+            <tr class="tableList">
+                <td class="tableList">{{ moderator.user.username }}</td>
+                <td class="tableList"><a href="/approveModerator?moderator={{ moderator.pk }}">Approve</a></td>
+                <td class="tableList"><a href="/rejectModerator?moderator={{ moderator.pk }}">Reject</a></td>
+            </tr>{% endfor %}
+    </table>
+    {% endif %}
+    <a href="/welcome/">Back</a>
+{% endblock %}

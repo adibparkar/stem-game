@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block headContent %}
+    <script type="text/javascript">
+        var jsonData = '{{ jsonData|safe }}';
+        var mode = '{{ mode }}'
+    </script>
+    <script type="text/javascript" src="{{ STATIC_URL }}visualization.js"></script>
+    <style type='text/css'>
+    table, tr, td
+    {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 5px;
+    }
+    </style>
+{% endblock %}
+
+{% block bodyAttributes %}onload="generateLeaderboard();"{% endblock %}
+
+{% block mainContent %}
+    <div id="leaderboardTable">
+        <p>Top Players By Votes</p>
+        <table id="voteTable"></table>
+        <p>Top Players By Areas</p>
+        <table id="areaTable"></table>
+    </div>
+    <div id="footer"><a href="/map/?mode=player">Back</a></div>
+{% endblock %}

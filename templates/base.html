@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, target-densitydpi=high-dpi" />
+    <title>{% block title %}STEM Game{% endblock %}</title>
+    {% block headContent %}{% endblock %}
+</head>
+<body {% block bodyAttributes %}{% endblock %}>
+    {% if loggedIn %}
+    <div id="header">
+        <table>
+            <tr>
+                <td>Welcome {{ playerName|default:'Admin' }}.</td>
+                <td style="text-align: right"><a href="/logout/">Logout</a></td>
+            </tr>
+        </table>
+    </div>
+    {% endif %}
+    {% block mainContent %}{% endblock %}
+</body>
+</html>

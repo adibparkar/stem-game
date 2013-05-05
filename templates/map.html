@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block headContent %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}map.css" />
+    <script type="text/javascript">
+        var jsonData = '{{ jsonData|safe }}';
+        var mode = '{{ mode }}'
+    </script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}visualization.js"></script>
+{% endblock %}
+
+{% block bodyAttributes %}onload="initialize();"{% endblock %}
+
+{%  block mainContent %}
+    <div id="topMenu">
+        <a href="/welcome/">User Menu</a>
+        <a href="#" onclick="attemptAjaxUpdateForJSON('/jsonMap/?mode=player');">View Map by Player</a>
+        <a href="#" onclick="attemptAjaxUpdateForJSON('/jsonMap/?mode=team');">View Map by Team</a>
+        <a href="/leaderboard/">Leaderboard</a>
+    </div>
+    <div id="map_canvas"></div>
+    <div id="footer"><a href="/uploadContent/">Create Point of Interest</a></div>
+{% endblock %}
